@@ -36,7 +36,7 @@ public class AIimproved extends ApplicationAdapter implements InputProcessor {
         fUserY = Gdx.graphics.getHeight() / 2 - (fUserHeight / 2);
         fEnX = 0;
         fEnY = 0;
-        nEnSpeed = 3;
+        nEnSpeed = 1;
         nEnHealth = 50;
         nBarDelay = 10;
         nThrowOffbar = Gdx.graphics.getWidth() / 2;
@@ -54,7 +54,9 @@ public class AIimproved extends ApplicationAdapter implements InputProcessor {
         money();
         attack();
         playerHealth();
-        ThrowOff();
+        if (nEnSpeed > 1) {
+            ThrowOff();
+        }
         hit();
         // System.out.println(canAttack);
     }
@@ -182,12 +184,12 @@ public class AIimproved extends ApplicationAdapter implements InputProcessor {
         if (actions[0] == true) {
             SR.begin(ShapeType.Line);
             SR.setColor(Color.RED);
-            SR.ellipse(fUserX - 75, fUserY - 75, 200, 200);
+            SR.ellipse(fUserX - 150, fUserY - 150, 350, 350);
             SR.end();
         } else if (actions[1] == true) {
             SR.begin(ShapeType.Line);
             SR.setColor(Color.DARK_GRAY);
-            SR.ellipse(fUserX - 75, fUserY - 75, 200, 200);
+            SR.ellipse(fUserX - 150, fUserY - 150, 350, 350);
             SR.end();
         }
     }
@@ -230,7 +232,7 @@ public class AIimproved extends ApplicationAdapter implements InputProcessor {
 
     public void near() {
         if (((fUserX >= fEnX - 75) || (fUserX + 50 >= fEnX - 75)) && fUserX <= fEnX + 125
-                && ((fUserY >= fEnY - 75)||(fUserY + 50 >= fEnY - 75)) && fUserY <= fEnY + 125) {
+                && ((fUserY >= fEnY - 75) || (fUserY + 50 >= fEnY - 75)) && fUserY <= fEnY + 125) {
             isNear = true;
         }
     }
@@ -253,8 +255,8 @@ public class AIimproved extends ApplicationAdapter implements InputProcessor {
 
     public void attack() {
         if (actions[0] == true) {
-            if (fEnX + 50 >= fUserX - 75 && fEnX <= fUserX + 125
-                    && fEnY + 50 >= fUserY - 75 && fEnY <= fUserY + 125) {
+            if (fEnX + 50 >= fUserX - 150 && fEnX <= fUserX + 200
+                    && fEnY + 50 >= fUserY - 150 && fEnY <= fUserY + 200) {
                 canAttack = true;
                 //System.out.println("Yes");
             } else {
